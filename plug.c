@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include <math.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
@@ -28,8 +29,19 @@ void plug_post_reload(void *state){
 }
 
 void plug_update(void*){
+    float h = GetScreenHeight();
+    // float w = GetScreenWidth();
+    // float dt = GetTime();
+
+    float rw = 100;
+    float rh = 100;
+    float pad = rw*0.1;
+
     BeginDrawing();
-    ClearBackground(p->background);
+    ClearBackground(GetColor(0x181818FF));
+    for(size_t i = 0; i < 3; ++i){
+        DrawRectangle(rw*i + i*pad, (h-rh)*0.5, rw, rw, YELLOW);
+    }
     EndDrawing();
 }
 
