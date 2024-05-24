@@ -3,8 +3,13 @@
 #include "plug.h"
 #include <dlfcn.h>
 
-int main(void){
-    const char *libplug_path = "libplug.so";
+int main(int agrc, char **argv) {
+    if (agrc != 2) {
+        fprintf(stderr, "Usage: %s <libplug.so>\n", argv[0]);
+        return 1;
+    }
+    // const char *libplug_path = "libplug.so";
+    const char *libplug_path = argv[1];
     void *libplug = dlopen(libplug_path, RTLD_NOW);
     if (libplug == NULL) {
         fprintf(stderr, "Error: %s\n", dlerror());
@@ -40,11 +45,7 @@ int main(void){
 
     InitWindow(800, 450, "Panim2");
     while (!WindowShouldClose()){
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawCircle(400, 225, 50, RED);
-        DrawCircle(400, 325, 50, RED);
-        EndDrawing();
+        plug_update();
     }
     return 0;
 }
