@@ -11,6 +11,7 @@ static Plug *p = NULL;
 void plug_init(void){
     p = (Plug *)malloc(sizeof(*p));
     assert(p != NULL);
+    TraceLog(LOG_INFO, "initilized plug");
 }
 
 void *plug_pre_reload(void){

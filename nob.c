@@ -12,6 +12,7 @@ void cc(Nob_Cmd *cmd){
 
 void libs(Nob_Cmd *cmd){
     nob_cmd_append(cmd, "-Wl,-rpath=./lib");
+    nob_cmd_append(cmd, "-Wl,-rpath=./");
     nob_cmd_append(cmd, "-L", "./lib");
     nob_cmd_append(cmd, "-l:libraylib.so");
     nob_cmd_append(cmd, "-lm");
