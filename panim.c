@@ -59,6 +59,8 @@ int main(int agrc, char **argv) {
 
 
     plug_init();
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    SetTargetFPS(30);
 
     InitWindow(800, 450, "Panim2");
     while (!WindowShouldClose()){
