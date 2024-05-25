@@ -29,19 +29,35 @@ void plug_post_reload(void *state){
 }
 
 void plug_update(void*){
-    float h = GetScreenHeight();
-    // float w = GetScreenWidth();
-    // float dt = GetTime();
+    // Get screen dimensions
+    const float h = GetScreenHeight();
+    const float w = GetScreenWidth();
 
-    float rw = 100;
-    float rh = 100;
-    float pad = rw*0.1;
 
+    // Calculate padding and box dimensions
+    const float pv = h * 0.01f;
+    const float ph = w * 0.01f;
+    const float bw = (w - 3*ph) * 0.5f;
+    const float bh = h - 2 * pv;
+
+    // Calculate box positions
+    const Rectangle r1 = { ph, pv, bw, bh };
+    const Rectangle r2 = { 2*ph + bw, pv, bw, bh };
+
+    // Begin drawing
     BeginDrawing();
     ClearBackground(GetColor(0x181818FF));
-    for(size_t i = 0; i < 3; ++i){
-        DrawRectangle(rw*i + i*pad, (h-rh)*0.5, rw, rw, YELLOW);
+
+    // Draw boxes
+    DrawRectangleRec(r2, BLUE);
+    DrawRectangleRec(r1, RED);
+
+    // Draw ultra shot (if applicable)
+    if (IsKeyPressed(KEY_SPACE)) {
+        const Vector2 u1 = {r1.x + r1.width, r1.y + r1.height * 0.5f};
+        const Vector2 u2 = {r2.x, r2.y + r2.height * 0.5f};
+        DrawLineEx(u1, u2, 5.0f, YELLOW);
     }
+
     EndDrawing();
 }
-

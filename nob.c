@@ -6,6 +6,7 @@
 void cc(Nob_Cmd *cmd){
     nob_cmd_append(cmd, "cc");
     nob_cmd_append(cmd, "-Wall", "-Wextra", "-ggdb");
+    nob_cmd_append(cmd, "-Wno-unused-variable");
     nob_cmd_append(cmd, "-I", "./include");
 }
 
